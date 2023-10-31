@@ -6,6 +6,7 @@ from decouple import config
 APP_ID = config("APP_ID")
 APP_KEY = config("APP_KEY")
 SPREADSHEET = config("SHEETY_SPREADSHEET")
+SHEET_TOKEN = config("SHEETY_TOKEN")
 
 exercise_endpoint = "https://trackapi.nutritionix.com/v2/natural/exercise"
 
@@ -54,7 +55,12 @@ trainings = {
     }
 }
 
+spreadsheet_headers = {
+    "Authorization": SHEET_TOKEN
+}
+
 spreadsheet_response = requests.post(
     url = SPREADSHEET,
+    headers = spreadsheet_headers,
     json = trainings
 )
